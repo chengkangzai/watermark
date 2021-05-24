@@ -1,6 +1,7 @@
 from PIL import Image, ImageFont, ImageDraw
 import os
 
+# Change to your location
 font = ImageFont.truetype('OpenSans-SemiboldItalic.ttf', 60)
 
 
