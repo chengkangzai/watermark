@@ -26,10 +26,34 @@ def addText(imageSrc: str, prefix: str, number: int):
     image.save("[DONE] " + prefix + str(number) + ext)
 
 
-files = [f for f in os.listdir('.') if os.path.isfile(f)]
-prefix = input("What is the prefix").upper()
-number = int(input("What is the starting number").replace(" ", ""))
-for f in files:
-    if (".jpg" in f or ".jpeg" in f or ".png" in f) and "[DONE]" not in f:
-        addText(f, prefix, number)
-        number = number + 1
+print("1. Set number randomly")
+print("2. Set number by File Name")
+operation = input("What's the operation :")
+try:
+    ope = int(operation)
+    if ope <= 0 or ope >= 3:
+        print("Invalid operation")
+        exit()
+
+    if ope == 1:
+        files = [f for f in os.listdir('.') if os.path.isfile(f)]
+        prefix = input("What is the prefix :").upper()
+        number = int(input("What is the starting number :").replace(" ", ""))
+        print("PROCESSING...")
+        for f in files:
+            if (".jpg" in f or ".jpeg" in f or ".png" in f) and "[DONE]" not in f:
+                addText(f, prefix, number)
+                number = number + 1
+
+    if ope == 2:
+        print("WARNING : Pleas make sure the file have number in it")
+        files = [f for f in os.listdir('.') if os.path.isfile(f)]
+        prefix = input("What is the prefix : ").upper()
+        print("PROCESSING...")
+        for f in files:
+            if (".jpg" in f or ".jpeg" in f or ".png" in f) and "[DONE]" not in f:
+                number = int(f.replace(" ", "").split(".")[0])
+                addText(f, prefix, number)
+
+except ValueError:
+    print("Input must be Number")
